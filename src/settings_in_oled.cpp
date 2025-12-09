@@ -122,10 +122,11 @@ void change_temp()
         temp += 5;
         if (temp > TEMP_NAX)
             temp = TEMP_MIN;
+
+        changed = true;
     }
 
     currentSettings.min_temp = temp;
-    changed = true;
 
     if (is_button_pressed(BTN_YES))
     {
@@ -145,10 +146,11 @@ void change_clean()
         temp += 10;
         if (temp > 100)
             temp = 0;
+
+        changed = true;
     }
 
     currentSettings.min_clean = temp;
-    changed = true;
 
     if (is_button_pressed(BTN_YES))
     {
@@ -217,10 +219,11 @@ void change_read_interval()
         temp += 5000;
         if (temp > 60000)
             temp = READ_MIN;
+
+        changed = true;
     }
 
     currentSettings.read_interval = temp;
-    changed = true;
 
     if (is_button_pressed(BTN_YES))
     {

@@ -25,6 +25,9 @@ unsigned long last_read_time = 0;
 unsigned long last_interrupt_time = 0;     // Время последнего прерывания
 const unsigned long timer_duration = 1000; // как долго будет пищать баззер при alarm
 
+// unsigned long start_p = 0;
+// unsigned long end_p = 0;
+
 // put function declarations here:
 void setup_timer2_ctc();
 void setup_interrupts();
@@ -66,7 +69,6 @@ ISR(PCINT2_vect)
 
 void setup()
 {
-
   DDRB = 0x00;
   DDRB |= (1 << T_LED) | (1 << HEATER_RELAY); // для тестового LED на вывод
   PORTB &= ~(1 << HEATER_RELAY);
@@ -116,9 +118,43 @@ void work()
   {
     last_read_time = current_time;
 
+    // unsigned long start_t = micros();
     check_termometer();
+    // unsigned long end_t = micros();
+
+    // Serial.print(F("Print time: "));
+    // Serial.print(end_p - start_p);
+    // Serial.println(F(" us"));
+
+
+    //unsigned long start_turb = micros();
     check_turbidity();
+    //unsigned long end_turb = micros();
+
+    //     Serial.print(F("Print time: "));
+    // Serial.print(end_p - start_p);
+    // Serial.println(F(" us"));
+
+
+    //unsigned long start_tds = micros();
     check_tds();
+    //unsigned long end_tds = micros();
+
+    // Serial.print(F("Print time: "));
+    // Serial.print(end_p - start_p);
+    // Serial.println(F(" us"));
+
+    // Serial.print(F("Termometer time: "));
+    // Serial.print(end_t - start_t);
+    // Serial.println(F(" us"));
+
+    // Serial.print(F("Turbidity time:  "));
+    // Serial.print(end_turb - start_turb);
+    // Serial.println(F(" us"));
+
+    // Serial.print(F("TDS time:        "));
+    // Serial.print(end_tds - start_tds);
+    // Serial.println(F(" us"));
   }
 
   check_timer2(current_time);
@@ -190,6 +226,7 @@ void check_turbidity()
   // float voltage = sensorValue * (5.0 / 1024.0); // 2.31 Convert the analog reading (which goes from 0 – 1023) to a voltage (0 – 5V):
   sensorValue = constrain(sensorValue, 300, 474);
   uint8_t unturbidity = (uint8_t)map(sensorValue, 300, 474, 0, 100); // проценты чистоты
+
   display_measurement("Clean", unturbidity, "%", 2);
 
   // Проверка порога
@@ -224,6 +261,7 @@ void check_tds()
 
   Serial.print("[DEBUG] Raw TDS: ");
   Serial.println(sensorValue);
+
 
   // Проверка порога
   if (tds_value > currentSettings.max_tds)

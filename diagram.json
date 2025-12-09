@@ -98,7 +98,13 @@
     { "type": "wokwi-slide-switch", "id": "sw1", "top": 302, "left": 127.9, "attrs": {} },
     { "type": "wokwi-relay-module", "id": "relay1", "top": 105.8, "left": -19.2, "attrs": {} },
     { "type": "wokwi-led", "id": "led2", "top": 25.2, "left": 51.8, "attrs": { "color": "red" } },
-    { "type": "wokwi-logic-analyzer", "id": "logic1", "top": -57.25, "left": -144, "attrs": {"channelNames": "RX, TX,T2,WIRE, TIME"} }
+    {
+      "type": "wokwi-logic-analyzer",
+      "id": "logic1",
+      "top": -57.25,
+      "left": -144,
+      "attrs": { "channelNames": "RX, TX,T2,WIRE, TIME, D5, SCL, SDA" }
+    }
   ],
   "connections": [
     [ "temp1:GND", "bb1:30b.f", "black", [ "v0" ] ],
@@ -138,10 +144,11 @@
     [ "relay1:COM", "bb1:tn.41", "green", [ "h0" ] ],
     [ "led2:A", "bb1:tp.42", "green", [ "v0" ] ],
     [ "relay1:NO", "led2:C", "green", [ "h0" ] ],
-    [ "uno:13", "bb1:tp.20", "", [ "$bb" ] ],
-    [ "uno:12", "bb1:tn.20", "", [ "$bb" ] ],
-    [ "uno:9", "bb1:25t.a", "", [ "$bb" ] ],
-    [ "uno:8", "bb1:25t.b", "", [ "$bb" ] ],
+    [ "logic1:D0", "uno:0", "green", [ "h-67.2", "v408.5" ] ],
+    [ "logic1:D1", "uno:1", "green", [ "h-48", "v389.4" ] ],
+    [ "logic1:D2", "uno:3", "green", [ "h-38.4", "v360.8" ] ],
+    [ "logic1:D3", "uno:7", "green", [ "h-28.8", "v313.2" ] ],
+    [ "logic1:D4", "uno:9", "green", [ "h-19.2", "v277.6" ] ],
     [ "btn1:1.l", "bb1:47b.f", "", [ "$bb" ] ],
     [ "btn1:2.l", "bb1:49b.f", "", [ "$bb" ] ],
     [ "btn1:1.r", "bb1:47t.e", "", [ "$bb" ] ],
@@ -165,11 +172,8 @@
     [ "sw1:1", "bb1:51b.f", "", [ "$bb" ] ],
     [ "sw1:2", "bb1:52b.f", "", [ "$bb" ] ],
     [ "sw1:3", "bb1:53b.f", "", [ "$bb" ] ],
-    [ "logic1:D0", "uno:0", "green", [ "h-67.2", "v408.5" ] ],
-    [ "logic1:D1", "uno:1", "green", [ "h-48", "v389.4" ] ],
-    [ "logic1:D2", "uno:3", "green", [ "h-38.4", "v360.8" ] ],
-    [ "logic1:D3", "uno:7", "green", [ "h-28.8", "v313.2" ] ],
-    [ "logic1:D4", "uno:9", "green", [ "h-19.2", "v277.6" ] ]
+    [ "logic1:D6", "uno:A5.2", "green", [ "h-9.6", "v182.4" ] ],
+    [ "logic1:D7", "uno:A4.2", "green", [ "v182.4", "h28.8" ] ]
   ],
   "dependencies": {}
 }
